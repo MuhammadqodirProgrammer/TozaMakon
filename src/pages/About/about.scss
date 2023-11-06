@@ -1,0 +1,47 @@
+
+.our_story{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 0 !important;
+    margin-bottom: 70px !important;
+}
+.story_left{
+
+    h4{
+        font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 54px;
+line-height: 64px;
+/* identical to box height, or 119% */
+
+text-align: justify;
+letter-spacing: 0.06em;
+
+color: #000000;
+    }
+    p{
+        width: 505px;
+height: auto;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 26px;
+color: #000000;
+margin-bottom: 20px;
+    }
+}
+.story_right{
+    display: block;
+width: 705px !important;
+height: 609px !important;
+background: #EB7EA8;
+background-image: url(../../assets/images/story.png);
+border-radius: 4px 0px 0px 4px;
+background-size: contain;
+background-position: right;
+background-repeat: no-repeat;
+
+}
