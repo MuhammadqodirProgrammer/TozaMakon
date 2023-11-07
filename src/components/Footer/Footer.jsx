@@ -9,15 +9,18 @@ export const Footer = () => {
 	return (
 		<footer >
 			<div className='header_top bg-[#332942] text-white '>
-				<div className='container top_container'>
+			<div className='container top_container'>
 					<div className='top_shopping'>
-						<LuPhone size='20 ' />
-
-						<p className='flex items-center gap-[15px]'>
-							<span className=''>77 57</span>
-							<div className=' w-[25px] h-[2px] bg-white inline-block '></div>
+						<p className='flex items-center gap-[15px] flex-wrap'>
+							<div className='flex items-center gap-[15px]'>
+								<LuPhone size='20 ' />
+								<span className=''>77 57</span>
+							</div>
+							<span className=' w-[25px] h-[2px] bg-white   md:inline-block hidden'></span>
 							Xizmatlarimiz haqida bepul ma’lumot olish uchun qo'ng'iroq qiling!
-							<div className=' w-[25px] h-[2px] bg-white inline-block '></div>
+						</p>
+						<p className='flex items-center gap-[15px]'>
+							<span className=' w-[25px] h-[2px] bg-white md:inline-block hidden'></span>
 							Ish vaqti: 09:00 - 18:00
 						</p>
 					</div>
