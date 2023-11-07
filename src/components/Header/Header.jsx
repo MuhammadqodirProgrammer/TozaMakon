@@ -9,6 +9,8 @@ import orderIcon from "../../assets/images/orderIcon.svg";
 import cancelIcon from "../../assets/images/cancelIcon.svg";
 import reviewIcon from "../../assets/images/reviewIcon.svg";
 import logoutIcon from "../../assets/images/logoutIcon.svg";
+import {LuPhone} from "react-icons/lu"
+
 import "./Header.scss";
 import { useEffect, useRef } from "react";
 export const Header = () => {
@@ -22,18 +24,28 @@ export const Header = () => {
   }, []);
   return (
     <header className="header">
-      <div className="header_top">
+      <div className="header_top bg-[#332942] text-white ">
         <div className="container top_container">
           <div className="top_shopping">
-            <p>
-              Summer Sale For All Swim Suits And Free Express Delivery - OFF
-              50%!
+
+          <LuPhone size="20 "/>
+
+
+
+            <p className="flex items-center gap-[15px]">
+            <span className="">77 57</span> 
+            <div className=" w-[25px] h-[2px] bg-white inline-block "></div>
+            Xizmatlarimiz haqida bepul ma’lumot olish uchun qo'ng'iroq qiling! 
+            <div className=" w-[25px] h-[2px] bg-white inline-block "></div>
+            
+            Ish vaqti: 09:00 - 18:00
             </p>
-            <Link to="/product">ShopNow</Link>
           </div>
-          <div className="top_lang">
-            <p>English</p>
-            <img src={DropdownImg} />
+          <div className="flex items-center gap-[15px] ">
+          <NavLink to={"https://t.me/Muhammadqodir_Programmer"}>YouTube</NavLink>
+          <NavLink to={"https://t.me/Muhammadqodir_Programmer"}>Telegram</NavLink>
+          <NavLink to={"https://www.instagram.com/muhammadqodirkomilov02/"}>Instagram</NavLink>
+
           </div>
         </div>
       </div>
