@@ -41,9 +41,10 @@ export const Header = () => {
             Ish vaqti: 09:00 - 18:00
             </p>
           </div>
-          <div className="flex items-center gap-[15px] ">
+         
+        <div className="flex items-center gap-[15px] ">
           <NavLink to={"https://t.me/Muhammadqodir_Programmer"}>YouTube</NavLink>
-          <NavLink to={"https://t.me/Muhammadqodir_Programmer"}>Telegram</NavLink>
+          <NavLink to={"https://t.me/muhammadqodir_dev"}>Telegram</NavLink>
           <NavLink to={"https://www.instagram.com/muhammadqodirkomilov02/"}>Instagram</NavLink>
 
           </div>
