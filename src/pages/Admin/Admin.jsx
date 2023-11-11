@@ -11,7 +11,7 @@ import invation1 from '../../assets/images/invation1.png';
 import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
-import instance from '../../api/api';
+import instance, { baseUrl, baseUrlImg } from '../../api/api';
 export const Admin = () => {
 	const [modal, setModal] = useState(false);
 	const [catalogModal, setcatalogModal] = useState(false);
@@ -166,6 +166,33 @@ export const Admin = () => {
 		console.log(data?.data, 'catalog');
 		setService(data?.data);
 	};
+
+	const deleteNews = async (id) => {
+		const data = await instance.delete(`/news/${id}`);
+		alert(data?.data?.message);
+		if(data?.data){
+			getNews()
+		}
+	};
+	 
+
+	const deleteCatalog = async (id) => {
+		const data = await instance.delete(`/catalog/${id}`);
+		alert(data?.data?.message);
+		if(data?.data){
+			getCatalog()
+		}
+	};
+
+
+	const deleteService = async (id) => {
+		const data = await instance.delete(`/service/${id}`);
+		alert(data?.data?.message);
+		if(data?.data){
+			getservice()
+		}
+	};
+
 	async function handleSubmitServise(e) {
 		e.preventDefault();
 
@@ -180,7 +207,7 @@ export const Admin = () => {
 		console.log(data2, 'data');
 		alert(data2?.data?.message);
 		if (data2?.data?.message) {
-			getCatalog();
+			getservice();
 		}
 	}
 
@@ -292,7 +319,7 @@ export const Admin = () => {
 											key={el?.id}
 										>
 											<img
-												src={invation1}
+												src={`${baseUrlImg}/${el?.news_image}`}
 												alt='img '
 												className='mx-auto w-full object-cover mb-[16px] '
 											/>
@@ -314,7 +341,7 @@ export const Admin = () => {
 												<button className=' my-[15px] w-full   rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]  hover:bg-[#0FC36D] border-[1px] border-[#0FC36D]  text-[#0FC36D] hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] transition'>
 													edit
 												</button>
-												<button className=' my-[15px] w-full   rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]   border-[1px] bg-red-600  text-[#fff] hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] transition'>
+												<button className=' my-[15px] w-full   rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]   border-[1px] bg-red-600  text-[#fff] hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] transition' onClick={()=> deleteNews(el?.id) } >
 													delate
 												</button>
 											</div>
@@ -357,7 +384,7 @@ export const Admin = () => {
 												<button className=' my-[15px] w-full   rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]  hover:bg-[#0FC36D] border-[1px] border-[#0FC36D]  text-[#0FC36D] hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] transition'>
 													edit
 												</button>
-												<button className=' my-[15px] w-full   rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]   border-[1px] bg-red-600  text-[#fff] hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] transition'>
+												<button className=' my-[15px] w-full   rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]   border-[1px] bg-red-600  text-[#fff] hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] transition' onClick={()=> deleteCatalog(el?.id)} >
 													delate
 												</button>
 											</div>
@@ -414,7 +441,7 @@ export const Admin = () => {
 												<button className=' my-[15px] w-full   rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]  hover:bg-[#0FC36D] border-[1px] border-[#0FC36D]  text-[#0FC36D] hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] transition'>
 													edit
 												</button>
-												<button className=' my-[15px] w-full   rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]   border-[1px] bg-red-600  text-[#fff] hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] transition'>
+												<button className=' my-[15px] w-full   rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]   border-[1px] bg-red-600  text-[#fff] hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] transition' onClick={()=>deleteService(el?.id)} >
 													delate
 												</button>
 											</div>
