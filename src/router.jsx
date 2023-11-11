@@ -6,6 +6,7 @@ import { OrdersPage } from './pages/Orders/Orders';
 import { SingleOrderPage } from './pages/SingleOrder/SingleOrder';
 import { BlogPage } from './pages/Blog/Blog';
 import { Error404 } from './pages/Error404/Error404';
+import { Admin } from './pages/Admin/Admin';
 
 export const router = createBrowserRouter([
 	{
@@ -35,6 +36,11 @@ export const router = createBrowserRouter([
 			{
 				path: '/blog',
 				element: <BlogPage />,
+				errorElement: <h2>ERROR!!!</h2>,
+			},
+			{
+				path: '/admin',
+				element: <Admin />,
 				errorElement: <h2>ERROR!!!</h2>,
 			},
 			{

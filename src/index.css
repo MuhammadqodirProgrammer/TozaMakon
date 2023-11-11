@@ -2,3 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+.slick-slide > div {
+    margin: 0 10px;
+  }
+  .slick-list {
+    /* margin: 0 -10px; */
+  }
+
+  body{
+    overflow-x: hidden;
+  }
+
+  .my_b{
+margin-bottom: 40px !important;
+  }
+
+  .my_overlay{
+    background: rgba(0, 0, 0, 0.32);
+
+backdrop-filter: blur(27.5px);
+  }

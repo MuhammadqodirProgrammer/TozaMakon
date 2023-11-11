@@ -9,7 +9,7 @@ export const Footer = () => {
 	return (
 		<footer >
 			<div className='header_top bg-[#332942] text-white '>
-			<div className='container top_container'>
+			<div className='mycontainer top_container'>
 					<div className='top_shopping'>
 						<p className='flex items-center gap-[15px] flex-wrap'>
 							<div className='flex items-center gap-[15px]'>
