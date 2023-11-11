@@ -22,9 +22,7 @@ export const Admin = () => {
 	const [catalogContent, setcatalogContent] = useState(false);
 	const [serviceContent, setserviceContent] = useState(false);
 
-	const token =localStorage.getItem('token');
-
-	
+	const token = localStorage.getItem('token');
 
 	const [news, setNews] = useState([
 		{
@@ -51,13 +49,16 @@ export const Admin = () => {
 		},
 	]);
 
-	console.log(token, "token");
-
+	console.log(token, 'token');
 
 	const news_title = useRef();
 	const news_description = useRef();
 	const news_image = useRef();
+	const [setnews_imagest, setsetnews_imagest] = useState('');
+
 	const news_video = useRef();
+	const [news_videost, setnews_videost] = useState('');
+
 	const verifyCode = useRef();
 	const catalog_name = useRef();
 	const service_title = useRef();
@@ -67,6 +68,22 @@ export const Admin = () => {
 	const service_id = useRef();
 	const emailRef = useRef();
 	const passwordRef = useRef();
+
+	async function handleChange() {
+		const formData = new FormData();
+		formData.append('file', news_image?.current?.files[0]);
+		const resp = await instance.post('/upload', formData);
+		console.log(resp?.data?.file, 'fiel');
+		setsetnews_imagest(resp?.data?.file);
+	}
+
+	async function handleChangeVideo() {
+		const formData = new FormData();
+		formData.append('file', news_video?.current?.files[0]);
+		const resp = await instance.post('/upload', formData);
+		console.log(resp?.data?.file, 'fiel');
+		setnews_videost(resp?.data?.file);
+	}
 
 	async function handleSubmitLogin(e) {
 		e.preventDefault();
@@ -79,8 +96,7 @@ export const Admin = () => {
 		console.log(data?.data, 'login');
 		if (data?.data?.message) {
 			setloginModal((prev) => !prev);
-			setverifyMadal(true)
-
+			setverifyMadal(true);
 		}
 	}
 
@@ -88,36 +104,49 @@ export const Admin = () => {
 		e.preventDefault();
 
 		const req = {
-			verifyCode : +verifyCode?.current?.value,
-			
+			verifyCode: +verifyCode?.current?.value,
 		};
-		console.log(req ,"req");
+		console.log(req, 'req');
 		const data = await instance.post('/auth/verify', req);
 		console.log(data?.data?.token, 'login');
 		if (data?.data?.token) {
-	
-localStorage.setItem('token', data?.data?.token);
+			localStorage.setItem('token', data?.data?.token);
 
-			setverifyMadal(false)
-
+			setverifyMadal(false);
 		}
 	}
-
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 
-		const formData = new FormData();
+		console.dir(news_title?.current?.value);
+		const data = {
+			news_title: news_title?.current?.value,
+			news_description: news_description?.current?.value,
+			news_image: setnews_imagest,
+			news_video: news_videost,
+		};
+		const data2 = await instance.post('/news', data);
+		console.log(data2?.data, 'data');
+		alert(data2?.data?.message);
+		if (data2?.data?.message) {
+			getNews();
+		}
+	}
 
-		formData.append('news_title', news_title?.current?.value);
-		formData.append('news_description', news_description?.current?.value);
-		formData.append('news_image', news_image?.current?.files[0]);
-		formData.append('news_video', news_video?.current?.files[0]);
+	async function handleSubmitCatalog(e) {
+		e.preventDefault();
 
-		console.dir(news_video?.current?.files);
-
-		const data = await instance.post('/news', formData);
-		console.log(data, 'data');
+		console.dir(catalog_name?.current?.value);
+		const data = {
+			catalog_name: catalog_name?.current?.value,
+		};
+		const data2 = await instance.post('/catalog', data);
+		console.log(data2?.data, 'data');
+		alert(data2?.data?.message);
+		if (data2?.data?.message) {
+			getCatalog();
+		}
 	}
 
 	const getNews = async () => {
@@ -133,31 +162,35 @@ localStorage.setItem('token', data?.data?.token);
 	};
 
 	const getservice = async () => {
-		const data = await instance.get('/catalog');
+		const data = await instance.get('/service');
 		console.log(data?.data, 'catalog');
 		setService(data?.data);
 	};
 	async function handleSubmitServise(e) {
 		e.preventDefault();
 
-		const formData = new FormData();
+		const data = {
+			title: service_title?.current?.value,
+			description: service_description?.current?.value,
+			catalog_id: catalog_id?.current?.value,
+		};
+		console.dir(data);
 
-		formData.append('title', service_title?.current?.value);
-		formData.append('description', service_description?.current?.value);
-		formData.append('catalog_id', catalog_id?.current?.value);
-
-		console.dir(news_video?.current?.files);
-
-		const data = await instance.post('/catalog', formData);
-		console.log(data, 'data');
+		const data2 = await instance.post('/service', data);
+		console.log(data2, 'data');
+		alert(data2?.data?.message);
+		if (data2?.data?.message) {
+			getCatalog();
+		}
 	}
 
 	useEffect(() => {
-		// getNews()
-
-		if(token){
-			setloginModal(false)
+		if (token) {
+			setloginModal(false);
 		}
+		getNews();
+		getCatalog();
+		getservice();
 	}, []);
 	return (
 		<>
@@ -199,9 +232,13 @@ localStorage.setItem('token', data?.data?.token);
 			</div>
 
 			<div className=' flex  '>
-				<div className='  w-[25%]  bg-[#171923] min-h-screen  px-[20px] py-[40px]  pt-[110px] '>
+				<div className='  w-[22%]  bg-[#171923] min-h-screen  px-[20px] py-[40px]  pt-[110px] '>
 					<div className='flex items-start w-full justify-start flex-col gap-5 '>
-						<button className='  rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]  hover:bg-[#0FC36D] border-[1px] border-[#0FC36D]  text-white  hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] w-full transition'>
+						<button className='  rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[tranparent]  hover:bg-[#0FC36D] border-[1px] border-[#0FC36D]  text-white  hover:text-white shadow-lg font-bold md:text-[16px] text-[14px] w-full transition' 	onClick={() => {
+								setnewsContent(true);
+								setserviceContent(false);
+								setcatalogContent(false);
+							}}>
 							Add news
 						</button>
 
@@ -233,7 +270,7 @@ localStorage.setItem('token', data?.data?.token);
 					</div>
 				</div>
 
-				<div className='right w-[75%] bg-red-700 min-h-screen pt-[100px] px-[20px]'>
+				<div className='right w-[78%] bg-[#d0c9c9] min-h-screen pt-[100px] px-[20px]'>
 					{newsContent && (
 						<div className='news'>
 							<div className='flex justify-between items-center '>
@@ -494,6 +531,7 @@ localStorage.setItem('token', data?.data?.token);
 										type='file'
 										className='hidden'
 										ref={news_image}
+										onChange={handleChange}
 									/>
 								</label>
 							</div>
@@ -528,6 +566,7 @@ localStorage.setItem('token', data?.data?.token);
 										type='file'
 										className='hidden'
 										ref={news_video}
+										onChange={handleChangeVideo}
 									/>
 								</label>
 							</div>
@@ -547,7 +586,7 @@ localStorage.setItem('token', data?.data?.token);
 					<div className='modal_form  px-[40px] flex items-center justify-center  min-w-[100vw] min-h-[100vh] '>
 						<form
 							className=' bg-white max-w-[482px]  mx-auto p-[32px]  pt-[40px] rounded-[32px] relative'
-							onSubmit={handleSubmit}
+							onSubmit={handleSubmitCatalog}
 						>
 							<AiOutlineClose
 								size={30}
@@ -575,7 +614,6 @@ localStorage.setItem('token', data?.data?.token);
 					</div>
 				</div>
 			)}
-
 
 			{verifyMadal && (
 				<div className=' min-w-[100vw] min-h-[100vh] fixed top-0 left-0 bg-[#010101a5]    z-50  my_overlay'>
@@ -634,7 +672,7 @@ localStorage.setItem('token', data?.data?.token);
 								<input
 									className='flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground  focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50 no-focus grow border-none bg-[transparent] outline-none'
 									placeholder='news_title'
-									ref={news_title}
+									ref={service_title}
 									type='text'
 								/>
 							</div>
@@ -642,7 +680,7 @@ localStorage.setItem('token', data?.data?.token);
 								<input
 									className='flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground  focus-visible:ring-ring  disabled:cursor-not-allowed disabled:opacity-50 no-focus grow border-none bg-[transparent] outline-none'
 									placeholder='news_description'
-									ref={news_description}
+									ref={service_description}
 									type='text'
 								/>
 							</div>
@@ -661,7 +699,10 @@ localStorage.setItem('token', data?.data?.token);
 								))}
 							</select>
 
-							<button className=' text-white rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[#0FC36D] border-none  w-full shadow-lg font-bold'>
+							<button
+								type='submit'
+								className=' text-white rounded-[12px] flex items-center justify-center md:py-[16px] md:px-[24px] px-[16px] py-[10px] bg-[#0FC36D] border-none  w-full shadow-lg font-bold'
+							>
 								Yuborish
 							</button>
 						</form>
