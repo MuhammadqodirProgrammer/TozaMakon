@@ -1,18 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const baseUrlImg = 'http://165.227.164.31:4040';
-export const baseUrl = 'http://165.227.164.31:4040/api';
-const token =localStorage.getItem('token');
+export const baseUrlImg = "http://165.227.195.35:3333/";
+export const baseUrl = "http://165.227.195.35:3333/api";
+const token = localStorage.getItem("token");
 
 const apiRoot = axios.create({
-	baseURL: `http://161.35.188.153`,
+  baseURL: `http://161.35.188.153`,
 });
 
 const instance = axios.create({
-	baseURL: 'http://165.227.195.35:3333/api',
-	headers:{
-		Authorization: `Bearer ${token} `
-	}
+  baseURL: "http://165.227.195.35:3333/api",
+  headers: {
+    Authorization: `Bearer ${token} `,
+  },
 });
 
 // // Interceptors for handling common scenarios
