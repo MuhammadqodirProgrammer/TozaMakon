@@ -30,7 +30,11 @@ export const HomePage = () => {
   const [modal, setModal] = useState(false);
   const nameRef = useRef();
   const phonenumberRef = useRef();
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState([{
+    id:1,
+    description:"description",
+    title:"title",
+  }]);
   const [comments, setComments] = useState([]);
 
   async function handleSubmit(e) {

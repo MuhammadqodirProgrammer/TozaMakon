@@ -35,8 +35,8 @@ export const Header = () => {
 	function toggleTheme() {}
 
 	return (
-		<header className='header'>
-			<div className='header_top bg-[#332942] text-white '>
+		<header className='header sticky top-0   z-50 bg-white '>
+			<div className='header_top bg-[#332942] text-white  hidden md:block '>
 			<div className='mycontainer top_container'>
 					<div className='top_shopping'>
 						<p className='flex items-center gap-[15px] flex-wrap'>
@@ -64,7 +64,7 @@ export const Header = () => {
 					</div>
 				</div>
 			</div>
-			<div className='header_bottom mycontainer'>
+			<div className='header_bottom mycontainer  '>
 				<div className='logo'>
 					<Link to={'/'}>
 						<img src={logo} alt='logo ' className=' md:w-auto w-[130px] ' />

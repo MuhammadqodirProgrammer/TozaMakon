@@ -16,7 +16,13 @@ import { baseUrl, baseUrlImg } from "../../api/api";
 export const BlogPage = () => {
   const [active, setActive] = useState(true);
   const [currentTab, setCurrentTab] = useState("");
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState([
+    {
+      id:1,
+      news_description:"description",
+      news_title:"title",
+    }
+  ]);
   const [searchData, setSearchData] = useState([]);
   const [categories, setCategories] = useState([
     {
