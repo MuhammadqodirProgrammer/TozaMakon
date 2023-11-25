@@ -94,23 +94,23 @@ export const BlogPage = () => {
             </p>
           </div>
 
-          <div className="filter_box    rounded-[24px] bg-[#F6F7ED] p-[16px]  flex items-center justify-between ">
-            <div className="btn_box flex items-center gap-1">
+          <div className="filter_box    rounded-[24px] bg-[#F6F7ED] p-[16px]  flex items-center justify-between max-[651px]:flex-col-reverse ">
+            <div className="btn_box flex items-center gap-1 flex-wrap max-[651px]:w-full ">
               <button
-                className={`   rounded-[12px] h-[60px] flex items-center justify-center md:py-[16px] md:px-[20px] px-[16px] py-[10px]   hover:bg-[#0FC36D] border-[1px] border-[#0FC36D]   shadow-lg font-bold md:text-[16px] text-[14px] transition 
-									${active ? "bg-[#0FC36D] text-white" : " text-[#808080] bg-[tranparent] "}
+                className={`   rounded-[12px] h-[60px] flex max-[651px]:w-full items-center justify-center md:py-[16px] md:px-[20px] px-[16px] py-[10px]   hover:bg-[#0FC36D] border-[1px] border-[#0FC36D]   shadow-lg font-bold md:text-[16px] text-[14px] transition 
+									${active ? "bg-[#0FC36D] text-white" : " text-[#808080] max-[651px]:w-full bg-[tranparent] "}
 								 `}
                 onClick={() => setActive(!active)}
               >
                 Barchasi
-                <span className=" p-[10px] bg-white rounded-full  ml-2 text-[10px] w-[25px] h-[25px] flex items-center justify-center  text-[#808080]">
+                <span className=" p-[10px]  bg-white rounded-full  ml-2 text-[10px] w-[25px] h-[25px] flex items-center justify-center  text-[#808080]">
                   25
                 </span>
               </button>
 
               {categories.map((tab, i) => (
                 <button
-                  className={`   rounded-[12px] flex items-center h-[60px] justify-center md:py-[16px] md:px-[20px] px-[16px] py-[10px]   hover:bg-[#0FC36D] border-[1px] border-[#0FC36D]  text-[#808080]  shadow-lg font-bold md:text-[16px] text-[14px] transition   disabled:bg-[#0FC36D] disabled:text-white`}
+                  className={`   rounded-[12px] max-[651px]:w-full flex items-center h-[60px] justify-center md:py-[16px] md:px-[20px] px-[16px] py-[10px]   hover:bg-[#0FC36D] border-[1px] border-[#0FC36D]  text-[#808080]  shadow-lg font-bold md:text-[16px] text-[14px] transition   disabled:bg-[#0FC36D] disabled:text-white`}
                   key={i}
                   id={tab?.id + ""}
                   disabled={currentTab == `${tab?.id}`}
@@ -124,7 +124,7 @@ export const BlogPage = () => {
                 </button>
               ))}
             </div>
-            <div className="search max-w-[20%]">
+            <div className="search max-w-[20%] max-[651px]:min-w-full max-[651px]:my-3">
               <div className="flex min-h-[56px] grow items-center gap-4 rounded-md bg-[white]  dark:bg-bgColor px-4 w-full flex-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
